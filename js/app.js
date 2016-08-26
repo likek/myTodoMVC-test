@@ -1,7 +1,13 @@
 (function (angular) {
 	'use strict';
-	var myapp=angular.module('myapp',[]);
-	var mycontroller=myapp.controller('mycontroller',['$scope','$location',function($scope,$location){
+	var myapp=angular.module('myapp',['ngRoute']);
+	myapp.config(['$routeProvider',function($routeProvider){
+			$routeProvider.when('/:status?',{
+				controller:'mycontroller',
+				templateUrl:'main_temp'
+			})
+		}])
+	var mycontroller=myapp.controller('mycontroller',['$scope','$routeParams',function($scope,$routeParams){
 		$scope.lists=[
 			{
 				id:Math.random(),
@@ -92,7 +98,7 @@
 		}*/
 
 		/*使用￥location服务完成数据的过滤*/
-		$scope.selecter={};
+		/*$scope.selecter={};
 		$scope.$location=$location;
 		$scope.$watch('$location.path()',function(now,old){
 			switch(now){
@@ -106,11 +112,24 @@
 					$scope.selecter={};
 					break;
 			}
-		})
+		})*/
 		/*给数据过滤添加自定义匹配规则*/
 		$scope.compare=function(source,target){
 			return source===target;
 		}
+		$scope.selecter={};
+		var sta=$routeParams.status;
+		switch(sta){
+				case 'active':
+					$scope.selecter={completed:false};
+					break;
+				case 'completed':
+					$scope.selecter={completed:true};
+					break;
+				default:
+					$scope.selecter={};
+					break;
+			}
 	}])
 
 })(angular);
