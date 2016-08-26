@@ -36,6 +36,9 @@
 		/*增加一项*/
 		$scope.newitem='';
 		$scope.zengjia=function(newitem){
+			if(newitem.replace(/\s/g,'')==''){
+				return;
+			}
 			var obj={};
 			obj.id=Math.random();
 			obj.completed=false;
@@ -94,10 +97,10 @@
 		$scope.$watch('$location.path()',function(now,old){
 			switch(now){
 				case '/active':
-					$scope.selecter={completed:true};
+					$scope.selecter={completed:false};
 					break;
 				case '/completed':
-					$scope.selecter={completed:false};
+					$scope.selecter={completed:true};
 					break;
 				default:
 					$scope.selecter={};
