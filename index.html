@@ -8,8 +8,10 @@
 		<!-- CSS overrides - remove if you don't need it -->
 		<link rel="stylesheet" href="css/app.css">
 	</head>
-	<body ng-app="myapp" ng-controller="mycontroller">
-		<section class="todoapp">
+	<body ng-app="myapp">
+	<ng-view></ng-view>
+		<script id='main_temp' type='text/ng-template'>
+			<section class="todoapp">
 			<header class="header">
 				<h1>todos</h1>
 				<form ng-submit='zengjia(newitem)'>
@@ -55,8 +57,10 @@
 				<button class="clear-completed" ng-click="clearAll()">Clear completed</button>
 			</footer>
 		</section>
+		</script>
 		<!-- Scripts here. Don't remove ↓ -->
 		<script src="node_modules/angular/angular.min.js"></script>
+		<script src="node_modules/angular-route/angular-route.min.js"></script>
 		<script src="js/app.js"></script>
 	</body>
 </html>
