@@ -1,7 +1,7 @@
 (function (angular) {
 	'use strict';
 	var myapp=angular.module('myapp',[]);
-	var mycontroller=myapp.controller('mycontroller',['$scope',function($scope){
+	var mycontroller=myapp.controller('mycontroller',['$scope','$location',function($scope,$location){
 		$scope.lists=[
 			{
 				id:Math.random(),
@@ -65,7 +65,7 @@
 		$scope.save=function(){
 			$scope.currentEditId=-1;
 		}
-		$scope.selecter='';
+		/*$scope.selecter='';
 		$scope.tab=function(val){
 			switch(val){
 				case 'active':
@@ -78,7 +78,22 @@
 					$scope.selecter='';
 					break;
 			}
-		}
+		}*/
+		$scope.selecter={};
+		$scope.$location=$location;
+		$scope.$watch('$location.path()',function(now,old){
+			switch(now){
+				case '/active':
+					$scope.selecter={completed:true};
+					break;
+				case '/completed':
+					$scope.selecter={completed:false};
+					break;
+				default:
+					$scope.selecter={};
+					break;
+			}
+		})
 	}])
 
 })(angular);
