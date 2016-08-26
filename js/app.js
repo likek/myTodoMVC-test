@@ -48,7 +48,37 @@
 				}
 			})
 		}
-
+		$scope.clearAll=function(){
+			$scope.lists=[];
+		}
+		var checkAll=true;
+		$scope.toggle=function(){
+			angular.forEach($scope.lists,function(item){
+				item.completed=checkAll;
+			})
+			checkAll=!checkAll;
+		}
+		$scope.currentEditId=-1;
+		$scope.edit=function(id){
+			$scope.currentEditId=id;
+		}
+		$scope.save=function(){
+			$scope.currentEditId=-1;
+		}
+		$scope.selecter='';
+		$scope.tab=function(val){
+			switch(val){
+				case 'active':
+					$scope.selecter=false;
+					break;
+				case 'completed':
+					$scope.selecter=true;
+					break;
+				default:
+					$scope.selecter='';
+					break;
+			}
+		}
 	}])
 
 })(angular);
